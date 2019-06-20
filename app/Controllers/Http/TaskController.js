@@ -24,7 +24,11 @@ class TaskController {
     return task;
   }
 
-  async show({ params, request, response, view }) {}
+  async show({ params }) {
+    const task = await Task.findOrFail(params.id);
+
+    return task;
+  }
 
   async update({ params, request, response }) {}
 
