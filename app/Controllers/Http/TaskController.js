@@ -10,7 +10,19 @@ class TaskController {
       .fetch();
   }
 
-  async store({ request, params }) {}
+  async store({ request, params }) {
+    const data = request.only([
+      "user_id",
+      "title",
+      "description",
+      "due_date",
+      "file_id"
+    ]);
+
+    const task = await Task.create({ ...data, project_id: params.projects_id });
+
+    return task;
+  }
 
   async show({ params, request, response, view }) {}
 
