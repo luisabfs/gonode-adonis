@@ -39,7 +39,11 @@ class ProjectController {
     return project;
   }
 
-  async destroy({ params, request, response }) {}
+  async destroy({ params }) {
+    const project = await Project.findOrFail(params.id);
+
+    await project.delete();
+  }
 }
 
 module.exports = ProjectController;
