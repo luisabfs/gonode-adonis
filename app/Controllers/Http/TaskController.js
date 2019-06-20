@@ -3,11 +3,13 @@
 const Task = use("App/Models/Task");
 
 class TaskController {
-  async index({ request, response, view }) {
+  async index({ params }) {
     const tasks = await Task.query()
       .where("project_id", params.projects_id)
       .with("user")
       .fetch();
+
+    return tasks;
   }
 
   async store({ request, params }) {
@@ -41,6 +43,8 @@ class TaskController {
     ]);
 
     task.merge(data);
+
+    await task.save();
 
     return task;
   }
