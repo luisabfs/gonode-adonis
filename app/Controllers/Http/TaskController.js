@@ -30,7 +30,20 @@ class TaskController {
     return task;
   }
 
-  async update({ params, request, response }) {}
+  async update({ params, request }) {
+    const task = await Task.findOrFail(params.id);
+    const data = request.only([
+      "user_id",
+      "title",
+      "description",
+      "due_date",
+      "file_id"
+    ]);
+
+    task.merge(data);
+
+    return task;
+  }
 
   async destroy({ params, request, response }) {}
 }
