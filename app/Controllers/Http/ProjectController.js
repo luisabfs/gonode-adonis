@@ -1,6 +1,6 @@
 "use strict";
 
-const Project = use("App/Models/Projetc");
+const Project = use("App/Models/Project");
 
 class ProjectController {
   async index({ request, response, view }) {
